@@ -29,5 +29,5 @@ def test_calculator_subtract():
 def test_calculator_divide():
     """ test Division of two numbers"""
     calc=Calculator()
-    result=calc.divide_numbers(8,4)
-    assert  result== 2
+    result=calc.divide_numbers(1,0)
+    assert  result== 0.5
