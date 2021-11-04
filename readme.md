@@ -14,7 +14,7 @@ setup.py is a config file for pytest
 
 
 # Calculator Project Setup
-[![Build Status](https://app.travis-ci.com/Tanv08/calc2.svg?branch=main)](https://app.travis-ci.com/Tanv08/calc2)
+[![Build Status](https://app.travis-ci.com/Tanv08/calc2_division.svg?branch=main)](https://app.travis-ci.com/Tanv08/calc2_division)
 Run Pip Install
 pip install -r requirements.txt
 
