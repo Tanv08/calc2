@@ -3,7 +3,7 @@ import pprint
 
 import pytest
 
-from calculator.calculator import Calculator
+from calc3 import Calculation
 
 #this is how you define a function that will run each time you pass it to a test, it is called a fixture
 @pytest.fixture
