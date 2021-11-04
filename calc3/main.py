@@ -1,6 +1,6 @@
 """ content of calculator.py#"""
 class Calculator:
-    """ This is the Calculator class"""
+    """This is the Calculator class"""
 
     result = 1
     def get_result(self):
