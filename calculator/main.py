@@ -1,26 +1,40 @@
-""" This is the increment function"""
+""" import all the methods from calc_methods"""
+from calculator.calculator_calculations.addition import Addition
+from calculator.calculator_calculations.subtraction import Subtraction
+from calculator.calculator_calculations.multiplication import Multiplication
+from calculator.calculator_calculations.division import Division
+from calculator.history_calculations.history_calculations import History
+
+
 class Calculator:
-    """ This is the Calculator class"""
+    """ Creating a Module Calculator """
+    # result set to 0 for initialization
+    history = []
 
-    result = 0
-    def get_result(self):
-        """ Get Result of Calculation"""
-        return self.result
+    @staticmethod
+    def add_nums(*args):
+        """ Adds given list of numbers and appends the result to history """
+        addition = Addition(args).getresult()
+        History.add_calculation_to_history(addition)
+        return History.get_last_calculation_added()
 
-    def add_number(self, value_a):
-        """ adds number to result"""
-        self.result = self.result + value_a
-        return self.result
-    def subtract_number(self, value_a):
-        """ subtract number from result"""
-        self.result = self.result - value_a
-        return self.result
-    def multiply_numbers(self, value_a, value_b):
-        """ multiply two numbers and store the result"""
-        self.result = value_a * value_b
-        return self.result
+    @staticmethod
+    def subtract_nums(*args):
+        """ Subtracts given list of numbers and appends the result to history """
+        subtraction = Subtraction(args).getresult()
+        History.add_calculation_to_history(subtraction)
+        return History.get_last_calculation_added()
 
-    def divide_numbers(self, value_a, value_b):
-        """ divide two numbers and store the result"""
-        self.result = value_a/value_b
-        return self.result
+    @staticmethod
+    def multiply_nums(*args):
+        """ Multiplies given list of numbers and appends the result to history """
+        multiplication = Multiplication(args).getresult()
+        History.add_calculation_to_history(multiplication)
+        return History.get_last_calculation_added()
+
+    @staticmethod
+    def divide_nums(*args):
+        """ Divides given list of numbers and appends the result to history """
+        division = Division(args).getresult()
+        History.add_calculation_to_history(division)
+        return History.get_last_calculation_added()
