@@ -1,68 +1,49 @@
 """Testing the Calculator"""
-import pprint
 import pytest
+from calc.calculator import Calculator
+from calc.history.calculations import Calculations
+from calc.calculations.addition import Addition
+from calc.calculations.multiplication import Multiplication
+from calc.calculations.subtraction import Subtraction
+from calc.calculations.division import Division
 
-from calculator.calculator import Calculator
-
-#a function that will run each time you pass it to a test, it is called a fixture
 @pytest.fixture
-def clear_history():
-    """Clears the history items"""
-    Calculator.clear_history()
-
-def test_calculator_add(clear_history):
-    """Testing the Add function of the calculator"""
+def clear_history_fixture():
+    """define a function that will run each time you pass it to a test, it is called a fixture"""
+    # pylint: disable=redefined-outer-name
+    Calculations.clear_history()
+#You have to add the fixture function as a parameter to the test that you want to use it with
+def test_calculator_add_static(clear_history_fixture):
+    """testing that our calculator has a static method for addition"""
     # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.add_number(1,2) == 3
-    assert Calculator.add_number(2, 2) == 4
-    assert Calculator.add_number(3, 2) == 5
-    assert Calculator.add_number(4, 2) == 6
-    assert Calculator.history_count() == 4
-    assert Calculator.get_result_of_last_calculation_added_to_history() == 6
-    pprint.pprint(Calculator.history)
-
-def test_clear_history(clear_history):
-    """Test for the clearing the tuple by method clear_history"""
+    #using Tuple instead of args because we can pack as much data as we need into the tuple
+    my_tuple = (1.0,2.0,5.0)
+    assert isinstance(Calculator.add_numbers(my_tuple), Addition)
+    assert Calculator.get_last_result_value() == 8.0
+def test_calculator_subtract_static(clear_history_fixture):
+    """Testing the subtract method of the calc"""
     # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.add_number(1,2) == 3
-    assert Calculator.add_number(2, 2) == 4
-    assert Calculator.add_number(3, 2) == 5
-    assert Calculator.add_number(4, 2) == 6
-    assert Calculator.history_count() == 4
-
-def test_count_history(clear_history):
-    """Testing the length of tuple"""
+    #using Tuple instead of args because we can pack as much data as we need into the tuple
+    my_tuple = (1.0,2.0,3.0)
+    #creating the calculation result object
+    calculation_result_object = Calculator.subtract_numbers(my_tuple)
+    #testing the instance
+    assert isinstance(calculation_result_object, Subtraction)
+    #testing the last result of the calculation
+    assert Calculator.get_last_result_value() == -6.0
+    #testing that the result object performs the calculation
+    assert calculation_result_object.get_result() == -6.0
+def test_calculator_multiply_static(clear_history_fixture):
+    """Testing the multiply method of the calc"""
     # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.history_count() == 0
-    assert Calculator.add_number(2, 2) == 4
-    assert Calculator.add_number(3, 2) == 5
-    assert Calculator.history_count() == 2
-
-def test_get_last_calculation_result(clear_history):
-    """Testing the last item of the tuple"""
+    #using Tuple instead of args because we can pack as much data as we need into the tuple
+    my_tuple = (1.0,2.0,3.0)
+    assert isinstance(Calculator.multiply_numbers(my_tuple), Multiplication)
+    assert Calculator.get_last_result_value() == 6.0
+def test_calculator_divide_static(clear_history_fixture):
+    """Testing the divide method of the calc"""
     # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.add_number(2, 2) == 4
-    assert Calculator.add_number(3, 2) == 5
-    assert Calculator.get_result_of_last_calculation_added_to_history() == 5
-
-def test_get_first_calculation_result(clear_history):
-    """Testing the first item of tuple history"""
-    # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.add_number(2, 2) == 4
-    assert Calculator.add_number(3, 2) == 5
-    assert Calculator.get_result_of_first_calculation_added_to_history() == 4
-
-def test_calculator_subtract(clear_history):
-    """Testing the subtract method of the calculator"""
-    # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.subtract_number(1, 2) == -1
-
-def test_calculator_multiply(clear_history):
-    """ tests multiplication of two numbers"""
-    # pylint: disable=unused-argument,redefined-outer-name
-    assert Calculator.multiply_numbers(1,2) == 2
-
-def test_calculator_division(clear_history):
-    """ tests division of two numbers"""
-    # pylint: disable=unused-argument,redefined-outer-name
-    assert   Calculator.division_numbers(1,2) == 0.5
+    # using Tuple instead of args because we can pack as much data as we need into the tuple
+    my_tuple = (2.0, 1.0)
+    assert isinstance(Calculator.divide_numbers(my_tuple), Division)
+    assert Calculator.get_last_result_value() == 0.5
