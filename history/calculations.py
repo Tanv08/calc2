@@ -59,3 +59,4 @@ class Calculations:
         """Add a multiplication object to history using factory method create"""
         Calculations.add_calculation(Division.create(values))
         return Calculations.get_last_calculation_object()
+    
